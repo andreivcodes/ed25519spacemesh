@@ -1,6 +1,6 @@
 name: spacemesh_ed25519
 description: Native ed25519 implementation for Spacemesh.io
-version: 0.0.1
+version: 0.0.2
 homepage:
 
 environment:
