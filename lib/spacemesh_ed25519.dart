@@ -2,9 +2,10 @@ library spacemesh_ed25519;
 
 import 'dart:typed_data';
 import 'package:cryptography/cryptography.dart';
+import 'package:ed25519spacemesh/util.dart';
 import 'package:flutter/foundation.dart';
-import 'package:spacemesh_ed25519/edwards25519.dart';
-import 'package:spacemesh_ed25519/util.dart';
+
+import 'edwards25519.dart';
 
 /// PublicKeySize is the size, in bytes, of public keys as used in this package.
 const PublicKeySize = 32;
