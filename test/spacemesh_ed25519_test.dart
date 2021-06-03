@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:ed25519spacemesh/spacemesh_ed25519.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:spacemesh_ed25519/spacemesh_ed25519.dart';
 import 'package:bip39/bip39.dart' as bip39;
 
 void main() {
   test('newDerivedKeyFromSeed', () async {
-    final ed = ED25519();
+    final ed = Ed25519Spacemesh();
     var seed = bip39
         .mnemonicToSeed(
             "bus object report ask kind torch rule swamp observe crowd worry say")
@@ -90,7 +90,7 @@ void main() {
   });
 
   test('sign', () async {
-    final ed = ED25519();
+    final ed = Ed25519Spacemesh();
 
     Uint8List dummyMessage = Uint8List.fromList([255, 0, 255, 0]);
     Uint8List sigResult = Uint8List.fromList([
@@ -232,7 +232,7 @@ void main() {
   });
 
   test('extractPublicKey', () async {
-    final ed = ED25519();
+    final ed = Ed25519Spacemesh();
 
     Uint8List dummyMessage = Uint8List.fromList([255, 0, 255, 0]);
     Uint8List pkresult = Uint8List.fromList([
@@ -343,7 +343,7 @@ void main() {
   });
 
   test('verify', () async {
-    final ed = ED25519();
+    final ed = Ed25519Spacemesh();
 
     Uint8List pk = Uint8List.fromList([
       190,
