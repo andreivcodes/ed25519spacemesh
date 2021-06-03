@@ -18,7 +18,7 @@ const SignatureSize = 64;
 /// SeedSize is the size, in bytes, of private key seeds. These are the private key representations used by RFC 8032.
 const SeedSize = 32;
 
-class ED25519 {
+class Ed25519Spacemesh {
   Future<Uint8List> newKeyFromSeed(Uint8List seed) async {
     if (seed.length != SeedSize) {
       throw ArgumentError('ed25519: bad seed length ${seed.length}');
@@ -43,6 +43,7 @@ class ED25519 {
 
   Future<Uint8List> newDerivedKeyFromSeed(
       Uint8List seed, Uint8List index, Uint8List salt) async {
+    if (seed.length != SeedSize) throw ("incorrect seed length");
     final sink = Sha512().newHashSink();
     sink.add(seed);
     sink.add(salt);
@@ -56,6 +57,8 @@ class ED25519 {
   }
 
   Future<Uint8List> sign(Uint8List message, Uint8List privateKey) async {
+    if (privateKey.length != PrivateKeySize)
+      throw ("incorrect privatekey length");
     var h = Sha512().newHashSink();
 
     h.add(privateKey.sublist(0, 32));
@@ -123,7 +126,7 @@ class ED25519 {
 
   Future<Uint8List> extractPublicKey(Uint8List message, Uint8List sig) async {
     if ((sig.length != SignatureSize) || (sig[63] & 224 != 0)) {
-      throw ("ed25519: bad signature format");
+      throw ("bad signature format");
     }
 
     var h = Sha512().newHashSink();
@@ -178,7 +181,7 @@ class ED25519 {
   Future<bool> verify(
       Uint8List publicKey, Uint8List message, Uint8List sig) async {
     if (publicKey.length != PublicKeySize) {
-      throw ArgumentError('ed25519: bad publicKey length ${publicKey.length}');
+      throw ("bad publicKey length");
     }
     if (sig.length != SignatureSize || sig[63] & 224 != 0) {
       return false;
