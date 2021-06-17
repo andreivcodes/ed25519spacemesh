@@ -1,4 +1,4 @@
-import 'dart:convert';
+/* import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:ed25519spacemesh/spacemesh_ed25519.dart';
@@ -450,3 +450,4 @@ void main() {
     expect(await ed.verify(pk, msg, sig), true);
   });
 }
+ */

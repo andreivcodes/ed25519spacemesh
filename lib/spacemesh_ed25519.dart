@@ -3,7 +3,7 @@ library spacemesh_ed25519;
 import 'dart:typed_data';
 import 'package:cryptography/cryptography.dart';
 import 'package:ed25519spacemesh/util.dart';
-import 'package:flutter/foundation.dart';
+import 'package:collection/collection.dart';
 
 import 'edwards25519.dart';
 
@@ -220,6 +220,7 @@ class Ed25519Spacemesh {
 
     var checkR = Uint8List(32);
     R.ToBytes(checkR);
-    return listEquals(sig.sublist(0, 32), checkR);
+    Function eq = const ListEquality().equals;
+    return eq(sig.sublist(0, 32), checkR);
   }
 }
